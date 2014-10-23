@@ -8,14 +8,13 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.js"></script>
 		<script src="includes/index.js" type="text/javascript"></script>
-		
+
 		<!-- <script src="requirements/json_compare.js" type="text/javascript"></script> -->
 		<!-- <script src="requirements/diff.js" type="text/javascript"></script> -->
 		<!-- <script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script> -->
 
 		<link rel="stylesheet" href="octicons/octicons.css" />
 		<link rel="stylesheet" href="requirements/neue.css" />
-		<link rel="stylesheet" href="requirements/Proxima Nova/ProximaNova-Reg.otf" />
 		<!-- <script src="includes/jquery.js"></script> -->
 		<!-- <script src="includes/angular.min.js"></script> -->
 		<!-- <script src="includes/angular-sanitize.js"></script> -->
@@ -25,16 +24,15 @@
 				font-family: Proxima Nova;
 				src: url('includes/Proxima Nova/ProximaNova-Reg.otf');
 			}
-		
+
 			html {
 				font-family: 'Proxima Nova', 'Trebuchet MS', sans-serif;
 				color: #222222;
-				
 			}
-			
+
 			header {
 				color: white;
-				text-align:center;
+				text-align: center;
 				padding: 2%;
 				font-size: 150%;
 				background: #4e2b63;
@@ -102,7 +100,6 @@
 			.octicon-plus:hover, .octicon-trashcan:hover {
 				color: #333333;
 			}
-			
 
 			.fade {
 				-o-transition: .5s;
@@ -110,9 +107,9 @@
 				-moz-transition: .5s;
 				transition: .5s;
 			}
-			
+
 			.right {
-				float:right;
+				float: right;
 			}
 
 			.med-icon {
@@ -122,11 +119,11 @@
 			.button {
 				cursor: pointer;
 			}
-			
+
 			.autoMargin {
 				margin-left: auto;
 				margin-right: auto;
-				text-align:center;
+				text-align: center;
 			}
 
 			pre {
@@ -140,58 +137,97 @@
 				margin: 1%;
 				display: inline;
 				background-color: #f9f9f9;
-				
 				border-bottom: solid 2px #EEE;
 				border-right: solid 1px #EEE;
 				cursor: move;
-				
 			}
-			
+
 			.modules:active {
 				background-color: #f1f1f1;
 				opacity: .8;
 				/*box-shadow: 3px 3px rgba(0,0,0,.4);*/
-				
+
 			}
-			
+
 			#moduleHolder {
 				/*border: 1px solid black;*/
 			}
-			
+
 			.hide {
 				display: none;
 			}
-			
-			
+
 			.ng-hide {
-			  opacity:0;
+				opacity: 0;
 			}
-			
+
 			.size {
 				font-size: 14px;
 				font-weight: normal;
 			}
-			
+
 			.sectionHeader {
 				background: black;
 				text-align: center;
 			}
-			
-			.center {
-				text-align:center;
-			}
 
-			
+			.center {
+				text-align: center;
+			}
 
 		</style>
 
 	</head>
 	<body>
-		
+
 		<header>
 			SMS Admin
 		</header>
+
+		<script>
+			
+			var config = {"tips":{"10672":{"__comments":"Campaign 1","optins":[10523,10869,10521],"left":0,"top":0},"21837":{"__comments":"Campaign 2","optins":[12345,23453,12347,93746],"left":0,"top":0},"32451":{"__comments":"Campaign with long name","optins":[62173,83462],"left":0,"top":0},"63231":{"__comments":"Campaign 4","optins":[21435,126314],"left":0,"top":0},"Campaign 5":{"__comments":"New title","optins":[234123,82495,17263,12376],"left":0,"top":0},"Campaign 6":{"__comments":"New title","optins":[123456,821364,236521],"left":0,"top":0}}};
 		
-		@yield('content')
+
+			var campaignTips = config.tips;
+		
+		</script>
+
+		<main>
+
+			<div ng-controller="MainCtrl" id="moduleHolder">
+
+				<div class="center">
+					<button class="btn" ng-click="setPositions()">
+						Reposition
+					</button>
+					<button ng-click="save(config)" class="btn">
+						Save
+					</button>
+				</div>
+
+				<table ng-repeat="(key, tip) in campaignTips" class="modules" draggable ng-style="{left: tip.left, top: tip.top}" xpos="tip.left" ypos="tip.top" >
+
+					<tr >
+						<th><span class="button" edit-name="tip.__comments" key="key"></span><span key="key" remove-module="removeModule">hi</span></th>
+					</tr>
+					<tr >
+						<td>
+						<div ng-repeat="key in tip.optins track by $index" ng-init="code = tip.optins[key]">
+
+							<input class="write" ng-model="key" />
+							<span class="button" edit-code="key" index="{{$index}}"></span>
+						</div><span class="mega-octicon octicon-plus med-icon button addButton fade" add-new-code="tip"></span></td>
+					</tr>
+				</table>
+
+				<div style="clear: both; text-align: center; padding-top: 5%;">
+					<button add-new-module=""></button>
+				</div>
+
+			</div>
+
+		</main>
+
 	</body>
 </html>

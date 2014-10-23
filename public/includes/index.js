@@ -295,8 +295,8 @@
 		
 		
 		
-		$scope.startCampaignTransitions = startCampaignTransitions;
-		$scope.yesNoPaths = yesNoPaths;
+		// $scope.startCampaignTransitions = startCampaignTransitions;
+		// $scope.yesNoPaths = yesNoPaths;
 
 		$scope.campaignTips = campaignTips;
 		
@@ -364,7 +364,7 @@
 		
 		if(!log) log = "";
 		
-		$.post('upd', {
+		$.post('update', {
 			destination : destination,
 			file : model,
 			log : log
